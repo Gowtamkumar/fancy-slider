@@ -15,7 +15,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
-
+  //console.log("all data",images);
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
@@ -26,7 +26,7 @@ const showImages = (images) => {
 
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}" id="${image.id}">`;
-    gallery.appendChild(div)
+    gallery.appendChild(div);
 
   })
 
@@ -53,27 +53,25 @@ const getImages = (query) => {
 
     .catch(err => console.log(err))
   //console.log("ff",data);
+
 }
 let slideIndex = 0;
 const selectItem = (event, img) => {
 
   let element = event.target;
-
+  console.log('debugging', element);
   element.classList.toggle('added');
 
-  //console.log(element.classList.toggle('added'));
+
 
   let item = sliders.indexOf(img);
-  //console.log('id1', sliders.indexOf(img));
+  //console.log('debugging', sliders);
+  //console.log('debugging', sliders);
   if (item === -1) {
     sliders.push(img);
+    //console.log(sliders.push(img));
   } else {
-
-    //delete sliders[item];
-    console.log("IMag", sliders[item])
-    //console.log('id333333333333', sliders[item]);
-
-
+    sliders.pop(img);
 
   }
 }
@@ -94,6 +92,7 @@ const createSlider = () => {
     // crate slider previous next area
     sliderContainer.innerHTML = '';
     const prevNext = document.createElement('div');
+
     prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
     prevNext.innerHTML = ` 
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
@@ -108,7 +107,7 @@ const createSlider = () => {
 
 
     sliders.forEach(slide => {
-      console.log('slider', sliders);
+      //console.log('slider debugging', sliders);
       let item = document.createElement('div')
       item.className = "slider-item";
       item.innerHTML = `<img class="w-100"
@@ -117,8 +116,6 @@ const createSlider = () => {
       sliderContainer.appendChild(item)
 
     })
-
-
     changeSlide(0)
     timer = setInterval(function () {
       slideIndex++;
@@ -131,9 +128,6 @@ const createSlider = () => {
   }
 
 }
-
-
-
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
@@ -143,6 +137,7 @@ const changeItem = index => {
 const changeSlide = (index) => {
 
   const items = document.querySelectorAll('.slider-item');
+
   if (index < 0) {
     slideIndex = items.length - 1
     index = slideIndex;
@@ -152,7 +147,6 @@ const changeSlide = (index) => {
     index = 0;
     slideIndex = 0;
   }
-
   items.forEach(item => {
     item.style.display = "none"
   })
@@ -176,8 +170,8 @@ sliderBtn.addEventListener('click', function () {
 
 // Loading Spinner
 const LoadingSpinner = () => {
-  const lSpinner = document.getElementById("LoadingSpinner");
-  lSpinner.classList.toggle("d-none");
-  //console.log(lSpinner.classList);
+  const lSpinner = document.getElementById('Loading-spinner');
+  lSpinner.classList.toggle('d-none');
+  console.log(lSpinner.classList);
 }
 
