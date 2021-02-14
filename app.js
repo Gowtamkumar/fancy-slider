@@ -62,16 +62,13 @@ const selectItem = (event, img) => {
   console.log('debugging', element);
   element.classList.toggle('added');
 
-
-
   let item = sliders.indexOf(img);
-  //console.log('debugging', sliders);
-  //console.log('debugging', sliders);
+
   if (item === -1) {
     sliders.push(img);
-    //console.log(sliders.push(img));
-  } else {
-    sliders.pop(img);
+
+  } else if (item > -1) {
+    sliders.splice(item, 1);
 
   }
 }
